@@ -8,7 +8,7 @@ package com.example.tao.basis.bean;
  * @exception: 无
  * @explain: 网络请求Response基类
  */
-public class Response<T>{
+public class BeanResponse<T>{
 
     /**
      * status : 200
