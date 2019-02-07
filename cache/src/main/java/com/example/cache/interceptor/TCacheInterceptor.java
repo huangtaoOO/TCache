@@ -2,18 +2,18 @@ package com.example.cache.interceptor;
 
 import android.content.Context;
 import android.util.Log;
-
 import com.example.cache.cache.CacheManager;
 import com.example.cache.cache.CacheType;
+import com.example.cache.tool.NetUtil;
 
 import java.io.IOException;
-
 import okhttp3.FormBody;
 import okhttp3.Interceptor;
 import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import okhttp3.internal.Util;
 
 /**
  * @author: tao
@@ -24,6 +24,9 @@ import okhttp3.ResponseBody;
  * @explain: 说明
  */
 public class TCacheInterceptor implements Interceptor {
+    public static final String USE_CACHE = "use_cache";
+    public static final String TRUE = "true";
+
     private Context context;
 
     public void setContext(Context context)
@@ -40,53 +43,70 @@ public class TCacheInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException
     {
         Request request = chain.request();
-        String cacheHead = request.header("cache");
+        String cacheHead = request.header(USE_CACHE);
         String cache_control = request.header("Cache-Control");
+        // 意思是要缓存
+        // 这里还支持WEB端协议的缓存头
+        // 只支持get和post方法
+        boolean canUseCache = (TRUE.equals(cacheHead) ||
+                (cache_control != null && !cache_control.isEmpty())) &&
+                ("GET".equals(request.method()) || "post".equals(request.method()));
 
-        if ("true".equals(cacheHead) ||                              // 意思是要缓存
-                (cache_control != null && !cache_control.isEmpty())) // 这里还支持WEB端协议的缓存头
-        {
-            long oldnow = System.currentTimeMillis();
+        //如果没有网络且不能使用缓存怎返回失败，如果没有缓存则返回失败
+        long oldnow = System.currentTimeMillis();
+        Response response;
+        if (!NetUtil.hasInternet(context)){
+            if (canUseCache){
+                response = getCacheResponse(request, oldnow);
+                if (response==null){
+                    return getFaileRespons(chain,"无网络和缓存");
+                }else {
+                    return response;
+                }
+            }else {
+                return getFaileRespons(chain,"无网络");
+            }
+        }
+        //有网络能使用缓存，有缓存直接返回无缓存下一步
+        if (canUseCache){
+            response = getCacheResponse(request, oldnow);
+            if (response!=null){
+                return response;
+            }
+        }
+        response = chain.proceed(request);
+        //网络请求成功并且能够使用缓存才进行存储
+        if (response.isSuccessful()&&canUseCache){
+            ResponseBody responseBody = response.body();
+            long now = System.currentTimeMillis();
             String url = request.url().url().toString();
             String responStr = null;
             String reqBodyStr = getPostParams(request);
-            try
+            responStr = responseBody.string();
+            if (responseBody != null)
             {
-                Response response = chain.proceed(request);
-                if (response.isSuccessful()) // 只有在网络请求返回成功之后，才进行缓存处理，否则，404存进缓存，岂不笑话
-                {
-                    ResponseBody responseBody = response.body();
-                    if (responseBody != null)
-                    {
-                        responStr = responseBody.string();
-                        if (responStr == null)
-                        {
-                            responStr = "";
-                        }
-                        CacheManager.getInstance(context).setCache(CacheManager.encryptMD5(url + reqBodyStr), responStr);//存缓存，以链接+参数进行MD5编码为KEY存
-                        Log.i("HttpRetrofit", "--> Push Cache:" + url + " :Success");
-                    }
-                    return getOnlineResponse(response, responStr);
-                } else
-                {
-                    return chain.proceed(request);
+                if (responStr == null) {
+                    responStr = "";
                 }
-            } catch (Exception e)
-            {
-                e.printStackTrace();
-                Response response = getCacheResponse(request, oldnow); // 发生异常了，我这里就开始去缓存，但是有可能没有缓存，那么久需要丢给下一轮处理了
-                if (response == null)
-                {
-                    return chain.proceed(request);//丢给下一轮处理
-                } else
-                {
-                    return response;
-                }
+                CacheManager.getInstance(context).setCache(CacheManager.encryptMD5(url + reqBodyStr), responStr);//存缓存，以链接+参数进行MD5编码为KEY存
+                Log.i("HttpRetrofit", "--> Push Cache:" + url + " :Success");
             }
-        } else
-        {
-            return chain.proceed(request);
+            return getOnlineResponse(response, responStr);
+        }else {
+            return response;
         }
+    }
+
+    private Response getFaileRespons(Chain chain,String message){
+        return new Response.Builder()
+                .request(chain.request())
+                .protocol(Protocol.HTTP_1_1)
+                .code(504)
+                .message(message)
+                .body(Util.EMPTY_RESPONSE)
+                .sentRequestAtMillis(-1L)
+                .receivedResponseAtMillis(System.currentTimeMillis())
+                .build();
     }
 
     private Response getCacheResponse(Request request, long oldNow)
