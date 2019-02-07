@@ -1,5 +1,6 @@
 package com.example.cache.bean;
 
+
 /**
  * @author: tao
  * @time: 2019/1/13
