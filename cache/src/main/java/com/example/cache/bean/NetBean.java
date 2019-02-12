@@ -11,17 +11,33 @@ package com.example.cache.bean;
  */
 public class NetBean {
 
-    public String requestType;
+    private String requestType;
 
-    public String request;
+    private String requestUrl;
 
-    public long expireTime;
+    private long expireTime;
 
-    public String reply;
+    private String reply;
 
-    public String parameter;
+    private String parameter;
 
-    public String requestHeader;
+    private String requestHeader;
+
+    private String cacheVersion;
+
+    public NetBean() {
+    }
+
+    public NetBean(String requestType, String requestUrl, long expireTime, String reply,
+                   String parameter, String requestHeader, String cacheVersion) {
+        this.requestType = requestType;
+        this.requestUrl = requestUrl;
+        this.expireTime = expireTime;
+        this.reply = reply;
+        this.parameter = parameter;
+        this.requestHeader = requestHeader;
+        this.cacheVersion = cacheVersion;
+    }
 
     public String getRequestType() {
         return requestType;
@@ -31,12 +47,12 @@ public class NetBean {
         this.requestType = requestType;
     }
 
-    public String getRequest() {
-        return request;
+    public String getRequestUrl() {
+        return requestUrl;
     }
 
-    public void setRequest(String request) {
-        this.request = request;
+    public void setRequestUrl(String request) {
+        this.requestUrl = request;
     }
 
     public long getExpireTime() {
@@ -71,15 +87,24 @@ public class NetBean {
         this.requestHeader = requestHeader;
     }
 
+    public String getCacheVersion() {
+        return cacheVersion;
+    }
+
+    public void setCacheVersion(String cacheVersion) {
+        this.cacheVersion = cacheVersion;
+    }
+
     @Override
     public String toString() {
         return "NetBean{" +
                 "requestType='" + requestType + '\'' +
-                ", request='" + request + '\'' +
+                ", requestUrl='" + requestUrl + '\'' +
                 ", expireTime=" + expireTime +
                 ", reply='" + reply + '\'' +
                 ", parameter='" + parameter + '\'' +
                 ", requestHeader='" + requestHeader + '\'' +
+                ", cacheVersion='" + cacheVersion + '\'' +
                 '}';
     }
 }
