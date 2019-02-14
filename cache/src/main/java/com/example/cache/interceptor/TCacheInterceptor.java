@@ -59,12 +59,12 @@ public class TCacheInterceptor implements Interceptor {
             if (canUseCache){
                 response = getCacheResponse(request, oldnow);
                 if (response==null){
-                    return getFaileRespons(chain,"无网络和缓存");
+                    return getFailResponse(chain,"无网络和缓存");
                 }else {
                     return response;
                 }
             }else {
-                return getFaileRespons(chain,"无网络");
+                return getFailResponse(chain,"无网络");
             }
         }
         //有网络能使用缓存，有缓存直接返回无缓存下一步
@@ -78,7 +78,6 @@ public class TCacheInterceptor implements Interceptor {
         //网络请求成功并且能够使用缓存才进行存储
         if (response.isSuccessful()&&canUseCache){
             ResponseBody responseBody = response.body();
-            long now = System.currentTimeMillis();
             String url = request.url().url().toString();
             String responStr = null;
             String reqBodyStr = getPostParams(request);
@@ -97,7 +96,7 @@ public class TCacheInterceptor implements Interceptor {
         }
     }
 
-    private Response getFaileRespons(Chain chain,String message){
+    private Response getFailResponse(Chain chain, String message){
         return new Response.Builder()
                 .request(chain.request())
                 .protocol(Protocol.HTTP_1_1)
