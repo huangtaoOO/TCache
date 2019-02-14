@@ -14,13 +14,13 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class CacheHelper extends SQLiteOpenHelper{
 
-    public CacheHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public CacheHelper(Context context) {
+        super(context, SqlConstant.SQL_NAME, null, SqlConstant.DB_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
+        sqLiteDatabase.execSQL(SqlConstant.CACHE_CREATE_TABLE_SQL);
     }
 
     @Override
