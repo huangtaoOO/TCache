@@ -66,4 +66,9 @@ public class SqlConstant {
     public static final String QUERRY_CACHE = SqlConstant.cache.REQUEST_URL
             + " = ? and " + SqlConstant.cache.EXPIRE_TIME + " <= ?";
 
+    /**
+     * 通过url删除语句
+     */
+    public static final String DELETE_WHERE = SqlConstant.cache.REQUEST_URL + " = ?";
+
 }

@@ -3,40 +3,30 @@ package com.example.cache.cache;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.util.Log;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import com.example.cache.bean.CacheSource;
+import com.example.cache.bean.NetBean;
+import com.example.cache.memory.lruCacheUtil;
+import com.example.cache.sql.DaoCacheDataBase;
 import java.io.UnsupportedEncodingException;
+import java.lang.ref.SoftReference;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-
-/**
- * Created by xiaolei on 2017/5/17.
- */
-
 public class CacheManager
 {
+
     private ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
 
     public static final String TAG = "CacheManager";
 
-    //max cache size 10mb
-    private static final long DISK_CACHE_SIZE = 1024 * 1024 * 10;
-
-    private static final int DISK_CACHE_INDEX = 0;
-
-    private static final String CACHE_DIR = "responses";
-
-    private DiskLruCache mDiskLruCache;
+    private lruCacheUtil lruCacheUtil;
+    private DaoCacheDataBase daoCacheDataBase ;
 
     private volatile static CacheManager mCacheManager;
+
+    private SoftReference<Context> softReference;
 
     public static CacheManager getInstance(Context context)
     {
@@ -53,36 +43,23 @@ public class CacheManager
         return mCacheManager;
     }
 
-    
-    public void delete(Context context) throws Exception
-    {
-        File diskCacheDir = getDiskCacheDir(context, CACHE_DIR);
-        if (mDiskLruCache != null)
-        {
-            DiskLruCache.deleteContents(diskCacheDir);
-        }
-    }
 
     private CacheManager(Context context)
     {
-        File diskCacheDir = getDiskCacheDir(context, CACHE_DIR);
-        if (!diskCacheDir.exists())
-        {
-            boolean b = diskCacheDir.mkdirs();
-            Log.d(TAG, "!diskCacheDir.exists() --- diskCacheDir.mkdirs()=" + b);
-        }
-        if (diskCacheDir.getUsableSpace() > DISK_CACHE_SIZE)
-        {
-            try
-            {
-                mDiskLruCache = DiskLruCache.open(diskCacheDir,
-                        getAppVersion(context), 1/*一个key对应多少个文件*/, DISK_CACHE_SIZE);
-                Log.d(TAG, "mDiskLruCache created");
-            } catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
+        softReference = new SoftReference<>(context);
+        lruCacheUtil = new lruCacheUtil();
+        daoCacheDataBase = new DaoCacheDataBase(context);
+    }
+
+    /**
+     * 删除内存和数据库缓存
+     * @param context
+     * @throws Exception
+     */
+    public void deleteAll(Context context) throws Exception
+    {
+        lruCacheUtil.removeAll();
+        daoCacheDataBase.deleteAllData();
     }
 
     /**
@@ -90,33 +67,21 @@ public class CacheManager
      */
     public void putCache(String key, String value)
     {
-        if (mDiskLruCache == null)
+        NetBean netBean = new NetBean();
+        netBean.setRequestUrl(key);
+        netBean.setReply(value);
+        netBean.setExpireTime(System.currentTimeMillis() + CacheConfiguration.getTimeOut());
+        netBean.setCacheVersion(softReference.get()==null?
+                String.valueOf(CacheConfiguration.getAppVersion())
+                :String.valueOf(getAppVersion(softReference.get())));
+        if (lruCacheUtil == null && daoCacheDataBase == null)
             return;
-        OutputStream os = null;
-        try
-        {
-            DiskLruCache.Editor editor = mDiskLruCache.edit(encryptMD5(key));
-            os = editor.newOutputStream(DISK_CACHE_INDEX);
-            os.write(value.getBytes());
-            os.flush();
-            editor.commit();
-            mDiskLruCache.flush();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        } finally
-        {
-            if (os != null)
-            {
-                try
-                {
-                    os.close();
-                } catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
+        if (lruCacheUtil !=null)
+            lruCacheUtil.addNetBeanToMemory(key,netBean);
+        if (daoCacheDataBase != null){
+            daoCacheDataBase.insertCacheInfo(netBean);
         }
+
     }
 
     /**
@@ -137,57 +102,26 @@ public class CacheManager
     /**
      * 同步获取缓存
      */
-    public String getCache(String key)
+    public CacheSource getCache(String key)
     {
-        if (mDiskLruCache == null)
-        {
-            return null;
+        CacheSource cacheSource = new CacheSource();
+        if (lruCacheUtil!=null){
+            NetBean netBean = lruCacheUtil.getNetBeanFromMemCache(key);
+            if (netBean==null){
+                netBean = daoCacheDataBase.queryStudents(key);
+            }
+            cacheSource.setResult(CacheType.MEMORY_CACHE);
+            cacheSource.setResult(netBean.getReply());
+            return cacheSource;
         }
-        FileInputStream fis = null;
-        ByteArrayOutputStream bos = null;
-        try
-        {
-            DiskLruCache.Snapshot snapshot = mDiskLruCache.get(encryptMD5(key));
-            if (snapshot != null)
-            {
-                fis = (FileInputStream) snapshot.getInputStream(DISK_CACHE_INDEX);
-                bos = new ByteArrayOutputStream();
-                byte[] buf = new byte[1024];
-                int len;
-                while ((len = fis.read(buf)) != -1)
-                {
-                    bos.write(buf, 0, len);
-                }
-                byte[] data = bos.toByteArray();
-                return new String(data);
-            }
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        } finally
-        {
-            if (fis != null)
-            {
-                try
-                {
-                    fis.close();
-                } catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-            if (bos != null)
-            {
-                try
-                {
-                    bos.close();
-                } catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
+        if (daoCacheDataBase!=null){
+            NetBean netBean = daoCacheDataBase.queryStudents(key);
+            cacheSource.setResult(CacheType.DISK_CACHE);
+            cacheSource.setResult(netBean.getReply());
+            return cacheSource;
         }
-        return null;
+
+       return null;
     }
 
     /**
@@ -200,7 +134,7 @@ public class CacheManager
             @Override
             public void run()
             {
-                String cache = getCache(key);
+                CacheSource cache = getCache(key);
                 callback.onGetCache(cache);
             }
         });
@@ -211,26 +145,11 @@ public class CacheManager
      */
     public boolean removeCache(String key)
     {
-        if (mDiskLruCache != null)
-        {
-            try
-            {
-                return mDiskLruCache.remove(encryptMD5(key));
-            } catch (IOException e)
-            {
-                e.printStackTrace();
-            }
+        if (lruCacheUtil!=null && daoCacheDataBase!=null){
+            lruCacheUtil.removeNetBeanFromMemory(key);
+            return daoCacheDataBase.deleteData(key);
         }
         return false;
-    }
-
-    /**
-     * 获取缓存目录
-     */
-    private File getDiskCacheDir(Context context, String uniqueName)
-    {
-        String cachePath = context.getCacheDir().getPath();
-        return new File(cachePath + File.separator + uniqueName);
     }
 
     /**

@@ -64,6 +64,17 @@ public class DaoCacheDataBase {
     }
 
     /**
+     * 删除一条缓存信息
+     * @param requestUrl
+     * @return
+     */
+    public boolean deleteData(String requestUrl){
+        return database.delete(SqlConstant.cache.TABLE_CACHE,SqlConstant.DELETE_WHERE,new String[]{
+                requestUrl
+        })!=0;
+    }
+
+    /**
      * 删除表中所有数据
      */
     public void deleteAllData(){

@@ -18,18 +18,28 @@ public class lruCacheUtil {
 
 
     // 把Bitmap对象加入到缓存中
-    public void addBitmapToMemory(String key, NetBean bitmap) {
-        if (getBitmapFromMemCache(key) == null) {
+    public void addNetBeanToMemory(String key, NetBean bitmap) {
+        if (getNetBeanFromMemCache(key) == null) {
             lruCache.put(key, bitmap);
         }
     }
     // 从缓存中得到Bitmap对象
-    public NetBean getBitmapFromMemCache(String key) {
-        return lruCache.get(key);
+    public NetBean getNetBeanFromMemCache(String key) {
+        NetBean netBean = lruCache.get(key);
+        if (System.currentTimeMillis() < netBean.getExpireTime()){
+            return netBean;
+        }else {
+            return null;
+        }
     }
 
     // 从缓存中删除指定的Bitmap
-    public void removeBitmapFromMemory(String key) {
+    public void removeNetBeanFromMemory(String key) {
         lruCache.remove(key);
+    }
+
+    //清空缓存
+    public void removeAll(){
+        lruCache.evictAll();
     }
 }
