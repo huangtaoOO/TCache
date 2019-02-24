@@ -1,10 +1,12 @@
 package com.example.tao.basis.net;
 
+import com.example.tao.basis.BaseApplication;
 import com.example.tao.basis.Constant;
 import com.example.tao.basis.utils.LogUtil;
 
 import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
+import okhttp3.internal.cache.CacheInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -40,6 +42,7 @@ public class NetworkClient {
                 .newBuilder()
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .addInterceptor(new CacheInterceptor(BaseApplication.getInstance()))
                 .addInterceptor(loggingInterceptor)
                 .build();
         retrofit = new Retrofit.Builder()
