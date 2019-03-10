@@ -34,6 +34,7 @@ public class DaoCacheDataBase {
         contentValues.put(SqlConstant.cache.CACHE_VERSION,bean.getCacheVersion());
         contentValues.put(SqlConstant.cache.PARAMETER,bean.getParameter());
         contentValues.put(SqlConstant.cache.EXPIRE_TIME,bean.getExpireTime());
+        contentValues.put(SqlConstant.cache.REPLY,bean.getReply());
         database.insert(SqlConstant.cache.TABLE_CACHE,null,contentValues);
     }
 
@@ -47,7 +48,7 @@ public class DaoCacheDataBase {
         Cursor cursor = database.query(SqlConstant.cache.TABLE_CACHE, null,
                 SqlConstant.QUERRY_CACHE, new String[]{requestUrl, String.valueOf(time)},
                 null, null, null, null);
-        if (cursor!=null) {
+        if (cursor!=null&&cursor.moveToFirst()) {
             String reques_type = cursor.getString(cursor.getColumnIndex(SqlConstant.cache.REQUEST_TYPE));
             String request_url = cursor.getString(cursor.getColumnIndex(SqlConstant.cache.REQUEST_URL));
             String parameter = cursor.getString(cursor.getColumnIndex(SqlConstant.cache.PARAMETER));

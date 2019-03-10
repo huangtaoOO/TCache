@@ -26,6 +26,7 @@ public class lruCacheUtil {
     // 从缓存中得到Bitmap对象
     public NetBean getNetBeanFromMemCache(String key) {
         NetBean netBean = lruCache.get(key);
+        if (netBean == null) return null;
         if (System.currentTimeMillis() < netBean.getExpireTime()){
             return netBean;
         }else {

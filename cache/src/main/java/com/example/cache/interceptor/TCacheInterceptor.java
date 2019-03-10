@@ -29,11 +29,6 @@ public class TCacheInterceptor implements Interceptor {
 
     private Context context;
 
-    public void setContext(Context context)
-    {
-        this.context = context;
-    }
-
     public TCacheInterceptor(Context context)
     {
         this.context = context;
@@ -87,7 +82,7 @@ public class TCacheInterceptor implements Interceptor {
                 if (responStr == null) {
                     responStr = "";
                 }
-                CacheManager.getInstance(context).setCache(CacheManager.encryptMD5(url + reqBodyStr), responStr);//存缓存，以链接+参数进行MD5编码为KEY存
+                CacheManager.getInstance(context).setCache(CacheManager.encryptMD5(url + reqBodyStr), responStr,request.method());//存缓存，以链接+参数进行MD5编码为KEY存
                 Log.i("HttpRetrofit", "--> Push Cache:" + url + " :Success");
             }
             return getOnlineResponse(response, responStr);
@@ -113,7 +108,7 @@ public class TCacheInterceptor implements Interceptor {
         Log.i("HttpRetrofit", "--> Try to Get Cache   --------");
         String url = request.url().url().toString();
         String params = getPostParams(request);
-        String cacheStr = CacheManager.getInstance(context).getCache(CacheManager.encryptMD5(url + params));//取缓存，以链接+参数进行MD5编码为KEY取
+        String cacheStr = CacheManager.getInstance(context).getCache(CacheManager.encryptMD5(url + params)).getResult();//取缓存，以链接+参数进行MD5编码为KEY取
         if (cacheStr == null)
         {
             Log.i("HttpRetrofit", "<-- Get Cache Failure ---------");

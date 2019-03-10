@@ -49,7 +49,7 @@ public class SqlConstant {
     /**
      * 建表的 sql 语句
      */
-    public static final String CACHE_CREATE_TABLE_SQL = "create table" + cache.TABLE_CACHE + "("
+    public static final String CACHE_CREATE_TABLE_SQL = "create table " + cache.TABLE_CACHE + " ("
             + cache.ID + " integer primary key autoincrement ,"
             + cache.REQUEST_TYPE + " varchar(10) not null ,"
             + cache.REQUEST_URL + " text unique ,"
@@ -57,7 +57,7 @@ public class SqlConstant {
             + cache.PARAMETER + " text ,"
             + cache.REQUEST_HEADER + " text ,"
             + cache.CACHE_VERSION + " varchar(10) not null ,"
-            + cache.REPLY + " text not null ,"
+            + cache.REPLY + " text not null "
             + ");";
 
     /**

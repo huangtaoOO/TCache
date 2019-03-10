@@ -65,7 +65,7 @@ public class CacheManager
     /**
      * 同步设置缓存
      */
-    public void putCache(String key, String value)
+    public void putCache(String key, String value,String type)
     {
         NetBean netBean = new NetBean();
         netBean.setRequestUrl(key);
@@ -74,6 +74,7 @@ public class CacheManager
         netBean.setCacheVersion(softReference.get()==null?
                 String.valueOf(CacheConfiguration.getAppVersion())
                 :String.valueOf(getAppVersion(softReference.get())));
+        netBean.setRequestType(type);
         if (lruCacheUtil == null && daoCacheDataBase == null)
             return;
         if (lruCacheUtil !=null)
@@ -87,14 +88,14 @@ public class CacheManager
     /**
      * 异步设置缓存
      */
-    public void setCache(final String key, final String value)
+    public void setCache(final String key, final String value,final String type)
     {
         cachedThreadPool.submit(new Runnable()
         {
             @Override
             public void run()
             {
-                putCache(key, value);
+                putCache(key, value,type);
             }
         });
     }
@@ -111,7 +112,7 @@ public class CacheManager
                 netBean = daoCacheDataBase.queryStudents(key);
             }
             cacheSource.setResult(CacheType.MEMORY_CACHE);
-            cacheSource.setResult(netBean.getReply());
+            cacheSource.setResult(netBean==null?null:netBean.getReply());
             return cacheSource;
         }
         if (daoCacheDataBase!=null){
