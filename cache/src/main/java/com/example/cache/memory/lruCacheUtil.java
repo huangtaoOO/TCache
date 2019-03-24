@@ -17,13 +17,11 @@ public class lruCacheUtil {
     }
 
 
-    // 把Bitmap对象加入到缓存中
-    public void addNetBeanToMemory(String key, NetBean bitmap) {
+    public void addNetBeanToMemory(String key, NetBean cache) {
         if (getNetBeanFromMemCache(key) == null) {
-            lruCache.put(key, bitmap);
+            lruCache.put(key, cache);
         }
     }
-    // 从缓存中得到Bitmap对象
     public NetBean getNetBeanFromMemCache(String key) {
         NetBean netBean = lruCache.get(key);
         if (netBean == null) return null;

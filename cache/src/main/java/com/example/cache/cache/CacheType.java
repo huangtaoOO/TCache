@@ -1,8 +1,5 @@
 package com.example.cache.cache;
 
-/**
- * Created by xiaolei on 2017/12/12.
- */
 
 public class CacheType
 {

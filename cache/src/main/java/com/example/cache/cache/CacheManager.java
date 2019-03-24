@@ -65,12 +65,12 @@ public class CacheManager
     /**
      * 同步设置缓存
      */
-    public void putCache(String key, String value,String type)
+    public void putCache(String key, String value,String type,long time)
     {
         NetBean netBean = new NetBean();
         netBean.setRequestUrl(key);
         netBean.setReply(value);
-        netBean.setExpireTime(System.currentTimeMillis() + CacheConfiguration.getTimeOut());
+        netBean.setExpireTime(System.currentTimeMillis() + time);
         netBean.setCacheVersion(softReference.get()==null?
                 String.valueOf(CacheConfiguration.getAppVersion())
                 :String.valueOf(getAppVersion(softReference.get())));
@@ -88,16 +88,8 @@ public class CacheManager
     /**
      * 异步设置缓存
      */
-    public void setCache(final String key, final String value,final String type)
-    {
-        cachedThreadPool.submit(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                putCache(key, value,type);
-            }
-        });
+    public void setCache(final String key, final String value,final String type,final long time) {
+        cachedThreadPool.submit(() -> putCache(key, value,type,time));
     }
 
     /**
@@ -128,24 +120,17 @@ public class CacheManager
     /**
      * 异步获取缓存
      */
-    public void getCache(final String key, final CacheCallback callback)
-    {
-        cachedThreadPool.submit(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                CacheSource cache = getCache(key);
-                callback.onGetCache(cache);
-            }
+    public void getCache(final String key, final CacheCallback callback) {
+        cachedThreadPool.submit(() -> {
+            CacheSource cache = getCache(key);
+            callback.onGetCache(cache);
         });
     }
 
     /**
      * 移除缓存
      */
-    public boolean removeCache(String key)
-    {
+    public boolean removeCache(String key) {
         if (lruCacheUtil!=null && daoCacheDataBase!=null){
             lruCacheUtil.removeNetBeanFromMemory(key);
             return daoCacheDataBase.deleteData(key);
