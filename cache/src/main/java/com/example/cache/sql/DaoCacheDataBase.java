@@ -24,9 +24,23 @@ public class DaoCacheDataBase {
 
     /**
      * 插入一条缓存信息
+     * 判断数据库是否此字段，存在则修改
      * @param bean
      */
     public void insertCacheInfo(NetBean bean){
+        Cursor cursor = database.query(SqlConstant.cache.TABLE_CACHE, null,
+                SqlConstant.QUERRY_CACHE, new String[]{bean.getRequestUrl()},
+                null, null, null, null);
+        if (cursor!=null && cursor.moveToFirst()){
+            updateData(bean);
+        }else if (cursor!=null && !cursor.moveToFirst()){
+            updateData(bean);
+        }else {
+            insertCacheInfoOne(bean);
+        }
+    }
+
+    public void insertCacheInfoOne(NetBean bean){
         ContentValues contentValues =  new ContentValues();
         contentValues.put(SqlConstant.cache.REQUEST_TYPE,bean.getRequestType());
         contentValues.put(SqlConstant.cache.REQUEST_URL,bean.getRequestUrl());
@@ -36,6 +50,7 @@ public class DaoCacheDataBase {
         contentValues.put(SqlConstant.cache.EXPIRE_TIME,bean.getExpireTime());
         contentValues.put(SqlConstant.cache.REPLY,bean.getReply());
         database.insert(SqlConstant.cache.TABLE_CACHE,null,contentValues);
+
     }
 
     /**
@@ -80,5 +95,21 @@ public class DaoCacheDataBase {
      */
     public void deleteAllData(){
         database.delete(SqlConstant.cache.TABLE_CACHE,null,null);
+    }
+
+    /**
+     * 更新数据库
+     */
+    public void updateData(NetBean bean){
+        ContentValues contentValues =  new ContentValues();
+        contentValues.put(SqlConstant.cache.REQUEST_TYPE,bean.getRequestType());
+        contentValues.put(SqlConstant.cache.REQUEST_HEADER,bean.getRequestHeader());
+        contentValues.put(SqlConstant.cache.CACHE_VERSION,bean.getCacheVersion());
+        contentValues.put(SqlConstant.cache.PARAMETER,bean.getParameter());
+        contentValues.put(SqlConstant.cache.EXPIRE_TIME,bean.getExpireTime());
+        contentValues.put(SqlConstant.cache.REPLY,bean.getReply());
+        String whereClause = SqlConstant.cache.REQUEST_URL + " = ? ";
+        String[] whereArgs={bean.getRequestUrl()};
+        database.update(SqlConstant.cache.TABLE_CACHE,contentValues,whereClause,whereArgs);
     }
 }

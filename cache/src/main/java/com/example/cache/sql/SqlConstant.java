@@ -71,4 +71,9 @@ public class SqlConstant {
      */
     public static final String DELETE_WHERE = SqlConstant.cache.REQUEST_URL + " = ?";
 
+    /**
+     * 通过url以及是否超时的查询语句
+     */
+    public static final String QUERRY_CACHE_FOR_NAME = SqlConstant.cache.REQUEST_URL + " = ?";
+
 }

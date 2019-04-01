@@ -28,14 +28,10 @@ public class CacheManager
 
     private SoftReference<Context> softReference;
 
-    public static CacheManager getInstance(Context context)
-    {
-        if (mCacheManager == null)
-        {
-            synchronized (CacheManager.class)
-            {
-                if (mCacheManager == null)
-                {
+    public static CacheManager getInstance(Context context) {
+        if (mCacheManager == null) {
+            synchronized (CacheManager.class) {
+                if (mCacheManager == null) {
                     mCacheManager = new CacheManager(context);
                 }
             }
@@ -44,8 +40,7 @@ public class CacheManager
     }
 
 
-    private CacheManager(Context context)
-    {
+    private CacheManager(Context context) {
         softReference = new SoftReference<>(context);
         lruCacheUtil = new lruCacheUtil();
         daoCacheDataBase = new DaoCacheDataBase(context);
@@ -56,8 +51,7 @@ public class CacheManager
      * @param context
      * @throws Exception
      */
-    public void deleteAll(Context context) throws Exception
-    {
+    public void deleteAll(Context context) throws Exception {
         lruCacheUtil.removeAll();
         daoCacheDataBase.deleteAllData();
     }
@@ -65,8 +59,7 @@ public class CacheManager
     /**
      * 同步设置缓存
      */
-    public void putCache(String key, String value,String type,long time)
-    {
+    public void putCache(String key, String value,String type,long time) {
         NetBean netBean = new NetBean();
         netBean.setRequestUrl(key);
         netBean.setReply(value);
@@ -95,8 +88,7 @@ public class CacheManager
     /**
      * 同步获取缓存
      */
-    public CacheSource getCache(String key)
-    {
+    public CacheSource getCache(String key) {
         CacheSource cacheSource = new CacheSource();
         if (lruCacheUtil!=null){
             NetBean netBean = lruCacheUtil.getNetBeanFromMemCache(key);
@@ -167,8 +159,7 @@ public class CacheManager
     /**
      * 获取APP版本号
      */
-    private int getAppVersion(Context context)
-    {
+    private int getAppVersion(Context context) {
         PackageManager pm = context.getPackageManager();
         try
         {
