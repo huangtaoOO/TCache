@@ -1,31 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <data>
-        <import type="android.view.View"/>
-        <import type="java.lang.String"/>
-        <variable
-            name="viewModel"
-            type="com.example.tao.tcache.viewmodel.ViewModelOfMain"/>
-    </data>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MainActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/tv_main"
+        <View
+            android:id="@+id/head"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/head_height"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="text"
+            android:padding="@dimen/menu_button_padding"
+            android:src="@drawable/menu"
+            app:layout_constraintBottom_toBottomOf="@id/head"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/head" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home"
+            android:textColor="@color/baseTextColor"
+            app:layout_constraintBottom_toBottomOf="@id/head"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/head" />
+
+        <ImageView
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/menu_button_padding"
+            android:src="@drawable/search"
+            app:layout_constraintBottom_toBottomOf="@id/head"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/head" />
+
+        <FrameLayout
+            android:id="@+id/layout_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/bottom_height"
+            android:layout_marginTop="@dimen/head_height" />
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_height"
+            app:itemIconTint="@null"
+            app:itemTextColor="@color/navigation_selector"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom" />
 
     </android.support.constraint.ConstraintLayout>
-</layout>
+
+    <FrameLayout
+        android:id="@+id/layout_menu"
+        android:layout_width="@dimen/menu_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="start" />
+
+</android.support.v4.widget.DrawerLayout>
