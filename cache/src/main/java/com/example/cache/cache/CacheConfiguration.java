@@ -6,7 +6,7 @@ package com.example.cache.cache;
  * @e-mail: 1462320178@qq.com
  * @version: 1.0
  * @exception: 无
- * @explain: 说明
+ * @explain: 缓存配置
  */
 public class CacheConfiguration {
 

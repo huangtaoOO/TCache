@@ -11,18 +11,19 @@ package com.example.cache.bean;
  */
 public class NetBean {
 
+    //请求类型
     private String requestType;
-
+    //请求url 一般值为请求地址+参数 的md5值
     private String requestUrl;
-
+    //超时时间
     private long expireTime;
-
+    //回复
     private String reply;
-
+    //参数
     private String parameter;
-
+    //请求头
     private String requestHeader;
-
+    //缓存版本
     private String cacheVersion;
 
     public NetBean() {

@@ -8,7 +8,7 @@ import com.example.cache.cache.CacheType;
  * @e-mail: 1462320178@qq.com
  * @version: 1.0
  * @exception: 无
- * @explain: 说明
+ * @explain: 缓存返回值，主要用于说明返回的来源何处
  */
 public class CacheSource {
     private String result ;

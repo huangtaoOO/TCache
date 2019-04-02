@@ -14,6 +14,14 @@ import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * @author: tao
+ * @time: 2019/2/17
+ * @e-mail: 1462320178@qq.com
+ * @version: 1.0
+ * @exception: 无
+ * @explain: 缓存管理器
+ */
 public class CacheManager
 {
 
