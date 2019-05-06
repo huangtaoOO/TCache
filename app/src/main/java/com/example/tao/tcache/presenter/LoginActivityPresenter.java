@@ -1,6 +1,7 @@
 package com.example.tao.tcache.presenter;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.example.tao.tcache.App;
 import com.example.tao.tcache.base.BasePresenter;
 import com.example.tao.tcache.bean.model.Login;
 import com.example.tao.tcache.contract.Contract;
@@ -35,7 +36,7 @@ public class LoginActivityPresenter extends BasePresenter<Contract.LoginActivity
             @Override
             public void onSubscribe(Disposable d) {
                 LogUtils.i();
-                LoginUtil.setLoginUser(username,password);
+                App.getInstance().setLogin(true);
                 mCompositeDisposable.add(d);
             }
 

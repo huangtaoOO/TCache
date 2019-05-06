@@ -1,13 +1,11 @@
 package com.example.tao.tcache.base;
 
 import android.util.Log;
-
 import com.example.cache.interceptor.TCacheInterceptor;
 import com.example.tao.tcache.App;
 import com.example.tao.tcache.ConstantValue;
 import com.example.tao.tcache.interceptor.ReadCookieInterceptor;
 import com.example.tao.tcache.interceptor.WriteCookieInterceptor;
-
 import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -33,12 +31,7 @@ public class NetworkClient {
      * 私有化构造方法
      */
     private NetworkClient(){
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                Log.i("HttpLog",message);
-            }
-        });
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> Log.i("HttpLog",message));
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         okHttpClient = new OkHttpClient()
@@ -47,7 +40,7 @@ public class NetworkClient {
                 .readTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(new ReadCookieInterceptor())
-                .addInterceptor(new WriteCookieInterceptor(true))
+                .addInterceptor(new WriteCookieInterceptor())
                 .addInterceptor(new TCacheInterceptor(App.getInstance()))
                 .build();
         retrofit = new Retrofit.Builder()

@@ -2,6 +2,7 @@ package com.example.tao.tcache;
 
 import android.app.Application;
 import android.support.v7.app.AppCompatDelegate;
+import android.widget.SimpleCursorTreeAdapter;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
@@ -16,6 +17,7 @@ import org.litepal.LitePal;
  */
 public class App extends Application {
 
+    private boolean isLogin = false;
 
     @Override
     public void onCreate() {
@@ -35,4 +37,11 @@ public class App extends Application {
         return instance;
     }
 
+    public boolean isLogin() {
+        return isLogin;
+    }
+
+    public void setLogin(boolean login) {
+        isLogin = login;
+    }
 }

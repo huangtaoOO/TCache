@@ -59,5 +59,12 @@ dependencies {
     implementation(name: 'waveloadingview-0.3.4', ext: 'aar')
     implementation(name: 'flowlayout-lib-1.1.0', ext: 'aar')
     implementation files('libs/commons-lang3-3.8.1.jar')
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$converter_gson_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$adapter_rxjava2_version"
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
 }

@@ -133,6 +133,16 @@ public class ConstantValue {
     public static final String KEY_USER = "user";
 
     /**
+     * 用户名
+     */
+    public static final String USER_NAME = "loginUserName";
+
+    /**
+     * 密码
+     */
+    public static final String USER_PASSWORD = "loginUserPassword";
+
+    /**
      * 设置文件的保存名称
      */
     public static final String CONFIG_SETTINGS = "settings";

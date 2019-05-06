@@ -19,24 +19,28 @@ import okhttp3.Response;
  */
 public class WriteCookieInterceptor implements Interceptor {
 
-    private boolean mSaveCookie;
-
-    public WriteCookieInterceptor(boolean saveCookie) {
-        this.mSaveCookie = saveCookie;
-    }
+    private static final String n = "loginUserName_wanandroid_com=[\\u4e00-\\u9fa5\\w\\-]+;([\\s\\S]*)";
+    private static final String p = "token_pass_wanandroid_com=[\\u4e00-\\u9fa5\\w\\-]+;([\\s\\S]*)";
 
     @TargetApi(Build.VERSION_CODES.N)
     @Override
     public Response intercept(Chain chain) throws IOException {
         Response response = chain.proceed(chain.request());
-        if (mSaveCookie) {
-            List<String> headers = response.headers("Set-Cookie");
-            if (!headers.isEmpty()) {
-                StringBuilder sb = new StringBuilder();
-                headers.stream().forEach(h -> {
-                    sb.append(h).append(";");
-                });
-                SPUtils.getInstance(ConstantValue.CONFIG_COOKIE).put(ConstantValue.KEY_USER, sb.toString());
+        List<String> headers = response.headers("Set-Cookie");
+        if (!headers.isEmpty()) {
+            for (String s:headers) {
+                if (s.matches(n)){
+                    String a = s.split(";")[0];
+                    a = a.replace("loginUserName_wanandroid_com=","");
+                    String s1 = "loginUserName=" + a;
+                    SPUtils.getInstance(ConstantValue.CONFIG_COOKIE).put(ConstantValue.USER_NAME, s1);
+                }
+                if (s.matches(p)){
+                    String a = s.split(";")[0];
+                    a = a.replace("token_pass_wanandroid_com=","");
+                    String s1 = "loginUserPassword=" + a;
+                    SPUtils.getInstance(ConstantValue.CONFIG_COOKIE).put(ConstantValue.USER_PASSWORD, s1);
+                }
             }
         }
         return response;

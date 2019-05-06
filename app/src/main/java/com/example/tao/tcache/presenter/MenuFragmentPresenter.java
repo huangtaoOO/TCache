@@ -1,6 +1,7 @@
 package com.example.tao.tcache.presenter;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.example.tao.tcache.App;
 import com.example.tao.tcache.base.BasePresenter;
 import com.example.tao.tcache.bean.model.Logout;
 import com.example.tao.tcache.contract.Contract;
@@ -35,6 +36,7 @@ public class MenuFragmentPresenter extends BasePresenter<Contract.MenuFragmentVi
             @Override
             public void onSubscribe(Disposable d) {
                 LogUtils.i();
+                App.getInstance().setLogin(false);
                 mCompositeDisposable.add(d);
             }
 

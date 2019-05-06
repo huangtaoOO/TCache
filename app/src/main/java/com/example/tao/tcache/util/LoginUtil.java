@@ -4,6 +4,8 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.example.tao.tcache.App;
+import com.example.tao.tcache.ConstantValue;
 
 /**
  * @author wangyz
@@ -18,35 +20,16 @@ public class LoginUtil {
      * @return
      */
     public static String getLoginUser() {
-        String cookies = SPUtils.getInstance("cookie").getString("user");
-        Log.i("测试",cookies);
-        if (!TextUtils.isEmpty(cookies)) {
-            for (String cookie : cookies.split(";")) {
-                if (TextUtils.equals("loginUserName", cookie.split("=")[0])) {
-                    if (!TextUtils.isEmpty(cookie.split("=")[1])) {
-                        return cookie.split("=")[1];
-                    }
-                    break;
-                }
-            }
+        String cookies1 = SPUtils.getInstance(ConstantValue.CONFIG_COOKIE).getString(ConstantValue.USER_NAME);
+        String cookies2 = SPUtils.getInstance(ConstantValue.CONFIG_COOKIE).getString(ConstantValue.USER_PASSWORD);
+        if (!TextUtils.isEmpty(cookies1) && !TextUtils.isEmpty(cookies2)) {
+           return cookies1;
         }
         return "";
     }
 
-    public static void setLoginUser(String name,String pass){
-        Log.i("测试",name + "  " + pass);
-        SPUtils spUtils = SPUtils.getInstance("cookie");
-        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(pass)){
-            StringBuilder sb = new StringBuilder();
-            sb.append("loginUserName");
-            sb.append("=");
-            sb.append(name);
-            sb.append(";");
-            sb.append("pass");
-            sb.append("=");
-            sb.append(pass);
-            spUtils.put("cookie",sb.toString(),true);
-        }
+    public static void setLoginUser(){
+
     }
 
     /**
@@ -62,7 +45,7 @@ public class LoginUtil {
      * @return
      */
     public static boolean isLogin() {
-        return !TextUtils.isEmpty(getLoginUser());
+        return App.getInstance().isLogin();
     }
 
 }
