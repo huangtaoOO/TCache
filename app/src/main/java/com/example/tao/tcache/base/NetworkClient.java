@@ -40,7 +40,6 @@ public class NetworkClient {
                 .readTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(new ReadCookieInterceptor())
-                .addInterceptor(new WriteCookieInterceptor())
                 .addInterceptor(new TCacheInterceptor(App.getInstance()))
                 .build();
         retrofit = new Retrofit.Builder()
@@ -67,6 +66,34 @@ public class NetworkClient {
      */
     public <T> T createApi(Class<T> service){
         return retrofit.create(service);
+    }
+
+    /**
+     * 获取独立的Retrofit
+     * @param saveCookie 是否启用cookie
+     * @return                  Retrofit
+     */
+    public static Retrofit getNewRetrofit(Boolean saveCookie){
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> Log.i("HttpLog",message));
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient.Builder build = new OkHttpClient()
+                .newBuilder()
+                .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .addInterceptor(loggingInterceptor);
+        if (saveCookie!=null){
+            build.addInterceptor(new ReadCookieInterceptor());
+            build.addInterceptor(new WriteCookieInterceptor(saveCookie));
+        }
+        build.addInterceptor(new TCacheInterceptor(App.getInstance()));
+        OkHttpClient okHttpClient =  build.build();
+        return new Retrofit.Builder()
+                .baseUrl(ConstantValue.URL_BASE)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
     }
 
 }
