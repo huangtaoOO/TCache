@@ -28,12 +28,6 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-
-/**
- * @author wangyz
- * @time 2019/1/17 15:51
- * @description MenuFragment
- */
 public class MenuFragment extends BaseFragment<Contract.MenuFragmentView, MenuFragmentPresenter> implements Contract.MenuFragmentView {
 
     @BindView(R.id.username)

@@ -3,11 +3,6 @@ package com.example.tao.tcache.base;
 import com.example.tao.tcache.api.Api;
 import retrofit2.Retrofit;
 
-/**
- * @author wangyz
- * @time 2019/1/22 8:50
- * @description BaseModel
- */
 public class BaseModel {
     protected Retrofit mRetrofit;
 

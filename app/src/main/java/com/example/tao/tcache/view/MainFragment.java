@@ -42,11 +42,6 @@ import java.util.stream.Collectors;
 import butterknife.BindView;
 import me.itangqi.waveloadingview.WaveLoadingView;
 
-/**
- * @author wangyz
- * @time 2019/1/17 15:33
- * @description MainFragment
- */
 public class MainFragment extends BaseFragment<Contract.MainFragmentView, MainFragmentPresenter> implements Contract.MainFragmentView {
 
     @BindView(R.id.fragment_main_banner)

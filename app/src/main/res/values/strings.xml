@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WanAndroid</string>
+    <string name="app_name">XueAndroid</string>
 
     <string name="loading">加载中</string>
     <string name="load_failed">加载失败</string>

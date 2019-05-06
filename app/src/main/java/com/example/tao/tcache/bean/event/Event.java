@@ -1,10 +1,5 @@
 package com.example.tao.tcache.bean.event;
 
-/**
- * @author wangyz
- * @time 2019/1/23 15:45
- * @description Event
- */
 public class Event {
 
     /**

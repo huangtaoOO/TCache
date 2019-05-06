@@ -25,12 +25,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import me.itangqi.waveloadingview.WaveLoadingView;
-
-/**
- * @author wangyz
- * @time 2019/1/23 9:44
- * @description TreeFragment
- */
 public class TreeFragment extends BaseFragment<Contract.TreeFragmentView, TreeFragmentPresenter> implements Contract.TreeFragmentView {
 
     @BindView(R.id.fragment_tree_refresh)

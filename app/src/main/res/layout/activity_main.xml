@@ -11,43 +11,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <View
+        <android.support.v7.widget.Toolbar
             android:id="@+id/head"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:contentInsetStart="0dp"
+            app:contentInsetEnd="0dp"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/head_height"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/menu_button_padding"
-            android:src="@drawable/menu"
-            app:layout_constraintBottom_toBottomOf="@id/head"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/head" />
+            <ImageView
+                android:id="@+id/menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/menu_button_padding"
+                android:src="@drawable/menu"
+                android:layout_gravity="center_vertical|start"
+                android:layout_marginStart="4dp"/>
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/home"
-            android:textColor="@color/baseTextColor"
-            app:layout_constraintBottom_toBottomOf="@id/head"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/head" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home"
+                android:textColor="@color/baseTextColor"
+                android:textSize="18sp"
+                android:layout_gravity="center"/>
 
-        <ImageView
-            android:id="@+id/search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/menu_button_padding"
-            android:src="@drawable/search"
-            app:layout_constraintBottom_toBottomOf="@id/head"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/head" />
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/menu_button_padding"
+                android:src="@drawable/search"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginEnd="4dp"/>
+
+
+        </android.support.v7.widget.Toolbar>
 
         <FrameLayout
             android:id="@+id/layout_main"

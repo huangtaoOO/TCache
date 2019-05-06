@@ -2,11 +2,6 @@ package com.example.tao.tcache.bean.model;
 
 import java.util.List;
 
-/**
- * @author wangyz
- * @time 2019/1/28 16:40
- * @description KeyWord
- */
 public class KeyWord {
 
 

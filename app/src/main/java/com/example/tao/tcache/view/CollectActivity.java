@@ -35,11 +35,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.itangqi.waveloadingview.WaveLoadingView;
 
-/**
- * @author wangyz
- * @time 2019/1/28 14:19
- * @description CollectActivity
- */
 public class CollectActivity extends BaseActivity<Contract.CollectActivityView, CollectActivityPresenter> implements Contract.CollectActivityView {
 
 

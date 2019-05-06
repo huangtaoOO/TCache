@@ -21,11 +21,6 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-/**
- * @author wangyz
- * @time 2019/1/18 17:34
- * @description ArticleActivity
- */
 public class ArticleActivity extends BaseActivity<Contract.ArticleActivityView, ArticleActivityPresenter> implements Contract.ArticleActivityView {
 
 

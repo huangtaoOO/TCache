@@ -17,11 +17,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-/**
- * @author wangyz
- * @time 2019/1/22 9:51
- * @description WxArticleFragmentModel
- */
 public class WxArticleFragmentModel extends BaseModel implements Contract.WxArticleFragmentModel {
 
     public WxArticleFragmentModel() {

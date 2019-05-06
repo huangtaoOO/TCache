@@ -2,11 +2,6 @@ package com.example.tao.tcache.bean.db;
 
 import org.litepal.crud.LitePalSupport;
 
-/**
- * @author wangyz
- * @time 2019/1/18 14:36
- * @description Article
- */
 public class Article extends LitePalSupport {
 
     /**

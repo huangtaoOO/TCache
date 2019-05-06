@@ -14,11 +14,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * @author wangyz
- * @time 2019/1/23 15:27
- * @description TreeArticleFragmentPresenter
- */
 public class TreeArticleFragmentPresenter extends BasePresenter<Contract.TreeArticleFragmentView> implements Contract.TreeArticleFragmentPresenter {
 
     private Contract.TreeArticleFragmentModel mModel;

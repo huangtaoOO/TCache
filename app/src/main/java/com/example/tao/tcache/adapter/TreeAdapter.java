@@ -27,11 +27,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * @author wangyz
- * @time 2019/1/23 10:16
- * @description TreeAdapter
- */
 public class TreeAdapter extends RecyclerView.Adapter<TreeAdapter.ViewHolder> {
 
     private Context mContext;

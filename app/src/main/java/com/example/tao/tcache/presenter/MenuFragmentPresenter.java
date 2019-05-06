@@ -12,11 +12,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * @author wangyz
- * @time 2019/1/17 15:50
- * @description MenuFragmentPresenter
- */
 public class MenuFragmentPresenter extends BasePresenter<Contract.MenuFragmentView> implements Contract.MenuFragmentPresenter {
 
     private Contract.MenuFragmentModel mModel;

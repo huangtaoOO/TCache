@@ -4,14 +4,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.blankj.utilcode.util.SPUtils;
-import com.example.tao.tcache.App;
-import com.example.tao.tcache.ConstantValue;
 
-/**
- * @author wangyz
- * @time 2019/1/24 16:24
- * @description LoginUtil
- */
 public class LoginUtil {
 
     /**
@@ -20,16 +13,33 @@ public class LoginUtil {
      * @return
      */
     public static String getLoginUser() {
-        String cookies1 = SPUtils.getInstance(ConstantValue.CONFIG_COOKIE).getString(ConstantValue.USER_NAME);
-        String cookies2 = SPUtils.getInstance(ConstantValue.CONFIG_COOKIE).getString(ConstantValue.USER_PASSWORD);
-        if (!TextUtils.isEmpty(cookies1) && !TextUtils.isEmpty(cookies2)) {
-           return cookies1;
+        String cookies = SPUtils.getInstance("cookie").getString("user");
+        if (!TextUtils.isEmpty(cookies)) {
+            for (String cookie : cookies.split(";")) {
+                if (TextUtils.equals("loginUserName", cookie.split("=")[0])) {
+                    if (!TextUtils.isEmpty(cookie.split("=")[1])) {
+                        return cookie.split("=")[1];
+                    }
+                    break;
+                }
+            }
         }
         return "";
     }
 
-    public static void setLoginUser(){
-
+    public static void setLoginUser(String name,String pass){
+        SPUtils spUtils = SPUtils.getInstance("cookie");
+        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(pass)){
+            StringBuilder sb = new StringBuilder();
+            sb.append("loginUserName");
+            sb.append("=");
+            sb.append(name);
+            sb.append(";");
+            sb.append("pass");
+            sb.append("=");
+            sb.append(pass);
+            spUtils.put("cookie",sb.toString(),true);
+        }
     }
 
     /**
@@ -45,7 +55,7 @@ public class LoginUtil {
      * @return
      */
     public static boolean isLogin() {
-        return App.getInstance().isLogin();
+        return !TextUtils.isEmpty(getLoginUser());
     }
 
 }

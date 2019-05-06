@@ -14,11 +14,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-/**
- * @author wangyz
- * @time 2019/1/21 17:22
- * @description WxFragmentModel
- */
 public class WxFragmentModel extends BaseModel implements Contract.WxFragmentModel {
 
     @Override

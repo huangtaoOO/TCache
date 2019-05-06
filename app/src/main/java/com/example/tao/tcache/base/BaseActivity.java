@@ -7,12 +7,6 @@ import android.view.Window;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-/**
- * @param <V>
- * @param <P>
- * @author wangyz
- * Activity的基类
- */
 public abstract class BaseActivity<V, P extends BasePresenter<V>> extends AppCompatActivity {
 
     protected P mPresenter;

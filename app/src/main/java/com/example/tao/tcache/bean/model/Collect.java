@@ -1,10 +1,5 @@
 package com.example.tao.tcache.bean.model;
 
-/**
- * @author wangyz
- * @time 2019/1/24 17:12
- * @description Collect
- */
 public class Collect {
 
 

@@ -13,11 +13,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * @author wangyz
- * @time 2019/1/21 17:22
- * @description WxFragmentPresenter
- */
 public class WxFragmentPresenter extends BasePresenter<Contract.WxFragmentView> implements Contract.WxFragmentPresenter {
 
     private Contract.WxFragmentModel mModel;

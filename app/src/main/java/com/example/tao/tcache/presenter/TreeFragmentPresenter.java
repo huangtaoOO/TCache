@@ -13,11 +13,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * @author wangyz
- * @time 2019/1/23 9:42
- * @description TreeFragmentPresenter
- */
 public class TreeFragmentPresenter extends BasePresenter<Contract.TreeFragmentView> implements Contract.TreeFragmentPresenter {
 
     private Contract.TreeFragmentModel mModel;

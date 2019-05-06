@@ -5,6 +5,7 @@
     <color name="colorAccent">#C0C0C0</color>
 
     <color name="baseTextColor">#C0C0C0</color>
+    <color name="baseTextColorLight">#C0C0C0</color>
     <color name="baseBackground">#303030</color>
 
     <color name="tag_bg">#C0C0C0</color>

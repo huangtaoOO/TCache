@@ -17,11 +17,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author wangyz
- * @time 2019/1/22 9:40
- * @description ProjectAdapter
- */
 public class ProjectAdapter extends FragmentPagerAdapter {
 
     private FragmentManager mFragmentManager;

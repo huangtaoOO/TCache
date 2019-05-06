@@ -10,12 +10,6 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-/**
- * @param <V>
- * @param <P>
- * @author wangyz
- * Fragment的基类
- */
 public abstract class BaseFragment<V, P extends BasePresenter<V>> extends Fragment {
 
     protected View rootView;

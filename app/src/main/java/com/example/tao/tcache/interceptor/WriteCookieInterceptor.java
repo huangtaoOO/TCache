@@ -12,11 +12,6 @@ import java.util.List;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
-/**
- * @author wangyz
- * @time 2019/1/24 9:00
- * @description SaveCookieInterceptor
- */
 public class WriteCookieInterceptor implements Interceptor {
 
     private boolean mSaveCookie;

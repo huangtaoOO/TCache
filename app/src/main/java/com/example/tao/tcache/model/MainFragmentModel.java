@@ -18,11 +18,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-/**
- * @author wangyz
- * @time 2019/1/17 15:37
- * @description MainFragmentModel
- */
 public class MainFragmentModel extends BaseModel implements Contract.MainFragmentModel {
 
     public MainFragmentModel() {

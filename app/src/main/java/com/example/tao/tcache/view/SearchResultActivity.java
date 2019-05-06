@@ -34,11 +34,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import me.itangqi.waveloadingview.WaveLoadingView;
 
-/**
- * @author wangyz
- * @time 2019/1/28 17:28
- * @description SearchResultActivity
- */
 public class SearchResultActivity extends BaseActivity<Contract.SearchResultActivityView, SearchResultActivityPresenter> implements Contract.SearchResultActivityView {
 
     @BindView(R.id.activity_search_result_refresh)

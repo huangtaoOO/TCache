@@ -13,11 +13,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * @author wangyz
- * @time 2019/1/28 14:18
- * @description CollectActivityPresenter
- */
 public class CollectActivityPresenter extends BasePresenter<Contract.CollectActivityView> implements Contract.CollectActivityPresenter {
 
     private Contract.CollectActivityModel mModel;

@@ -34,11 +34,6 @@ import java.util.List;
 import butterknife.BindView;
 import me.itangqi.waveloadingview.WaveLoadingView;
 
-/**
- * @author wangyz
- * @time 2019/1/22 9:59
- * @description WxArticleFragment
- */
 public class WxArticleFragment extends BaseFragment<Contract.WxArticleFragmentView, WxArticleFragmentPresenter> implements Contract.WxArticleFragmentView {
 
     @BindView(R.id.fragment_wx_article_refresh)

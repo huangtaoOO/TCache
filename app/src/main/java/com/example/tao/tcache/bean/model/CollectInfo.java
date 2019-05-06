@@ -2,11 +2,6 @@ package com.example.tao.tcache.bean.model;
 
 import java.util.List;
 
-/**
- * @author wangyz
- * @time 2019/1/24 17:43
- * @description CollectInfo
- */
 public class CollectInfo {
 
 

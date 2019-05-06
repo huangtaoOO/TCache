@@ -11,11 +11,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * @author wangyz
- * @time 2019/1/24 10:27
- * @description RegisterActivityPresenter
- */
 public class RegisterActivityPresenter extends BasePresenter<Contract.RegisterActivityView> implements Contract.RegisterActivityPresenter {
 
     private Contract.RegisterActivityModel mModel;

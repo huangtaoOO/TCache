@@ -22,11 +22,6 @@ import java.util.List;
 import butterknife.BindView;
 import me.itangqi.waveloadingview.WaveLoadingView;
 
-/**
- * @author wangyz
- * @time 2019/1/22 14:46
- * @description ProjectFragment
- */
 public class ProjectFragment extends BaseFragment<Contract.ProjectFragmentView, ProjectFragmentPresenter> implements Contract.ProjectFragmentView {
 
     @BindView(R.id.fragment_project_tab)

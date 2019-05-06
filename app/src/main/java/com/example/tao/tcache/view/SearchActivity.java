@@ -31,11 +31,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import me.itangqi.waveloadingview.WaveLoadingView;
 
-/**
- * @author wangyz
- * @time 2019/1/28 16:49
- * @description SearchActivity
- */
 public class SearchActivity extends BaseActivity<Contract.SearchActivityView, SearchActivityPresenter> implements Contract.SearchActivityView {
 
     @BindView(R.id.tag_hot_key)

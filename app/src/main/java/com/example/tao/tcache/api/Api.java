@@ -22,11 +22,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-/**
- * @author wangyz
- * @time 2019/1/17 16:11
- * @description Api
- */
 public interface Api {
 
     /**

@@ -16,11 +16,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-/**
- * @author wangyz
- * @time 2019/1/17 15:34
- * @description Contract
- */
 public class Contract {
 
     /**

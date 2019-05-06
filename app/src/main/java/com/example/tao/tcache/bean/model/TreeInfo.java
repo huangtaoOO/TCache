@@ -4,11 +4,6 @@ import com.example.tao.tcache.bean.db.Tree;
 
 import java.util.List;
 
-/**
- * @author wangyz
- * @time 2019/1/23 10:47
- * @description TreeInfo
- */
 public class TreeInfo {
 
     public int parentId;

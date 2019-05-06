@@ -14,11 +14,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-/**
- * @author wangyz
- * @time 2019/1/28 14:18
- * @description CollectActivityModel
- */
 public class CollectActivityModel extends BaseModel implements Contract.CollectActivityModel {
 
     public CollectActivityModel() {

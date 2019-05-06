@@ -3,7 +3,10 @@ package com.example.tao.tcache.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.widget.EditText;
 
 import com.blankj.utilcode.util.LogUtils;
@@ -21,11 +24,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * @author wangyz
- * @time 2019/1/24 11:45
- * @description LoginActivity
- */
 public class LoginActivity extends BaseActivity<Contract.LoginActivityView, LoginActivityPresenter>
         implements Contract.LoginActivityView {
 
@@ -34,6 +32,10 @@ public class LoginActivity extends BaseActivity<Contract.LoginActivityView, Logi
     EditText username;
     @BindView(R.id.password)
     EditText password;
+    @BindView(R.id.til_username)
+    TextInputLayout tilUsername;
+    @BindView(R.id.til_password)
+    TextInputLayout tilPassword;
     private Context mContext;
 
     @Override
@@ -44,6 +46,48 @@ public class LoginActivity extends BaseActivity<Contract.LoginActivityView, Logi
     @Override
     protected void init(Bundle savedInstanceState) {
         mContext = this;
+
+        username.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length()!=0 && s.length()<6){
+                    tilUsername.setHelperText("用户名不合规范");
+                }else {
+                    tilUsername.setHelperText("");
+                }
+            }
+        });
+
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length()!=0 && s.length()<6){
+                    tilPassword.setHelperText("密码不合规范");
+                }else {
+                    tilPassword.setHelperText("");
+                }
+            }
+        });
     }
 
     @Override

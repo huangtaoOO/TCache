@@ -31,11 +31,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * @author wangyz
- * @time 2019/1/18 9:22
- * @description MainArticleAdapter
- */
 public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.ViewHolder> {
 
     private Context mContext;

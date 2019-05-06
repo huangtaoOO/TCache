@@ -13,11 +13,6 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/**
- * @author wangyz
- * @time 2019/1/24 9:19
- * @description ReadCookieInterceptor
- */
 public class ReadCookieInterceptor implements Interceptor {
 
     @Override

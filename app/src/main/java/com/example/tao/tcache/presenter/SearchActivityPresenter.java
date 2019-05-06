@@ -11,11 +11,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * @author wangyz
- * @time 2019/1/28 16:45
- * @description SearchActivityPresenter
- */
 public class SearchActivityPresenter extends BasePresenter<Contract.SearchActivityView> implements Contract.SearchActivityPresenter {
 
     private Contract.SearchActivityModel mModel;

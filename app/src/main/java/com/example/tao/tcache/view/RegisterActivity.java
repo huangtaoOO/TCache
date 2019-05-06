@@ -3,10 +3,15 @@ package com.example.tao.tcache.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -17,13 +22,9 @@ import com.example.tao.tcache.contract.Contract;
 import com.example.tao.tcache.presenter.RegisterActivityPresenter;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * @author wangyz
- * @time 2019/1/24 10:27
- * @description RegisterActivity
- */
 public class RegisterActivity extends BaseActivity<Contract.RegisterActivityView, RegisterActivityPresenter> implements Contract.RegisterActivityView {
 
     @BindView(R.id.back)
@@ -41,6 +42,13 @@ public class RegisterActivity extends BaseActivity<Contract.RegisterActivityView
     @BindView(R.id.register)
     Button mRegister;
 
+    @BindView(R.id.til_rpassword)
+    TextInputLayout tilRpassword;
+    @BindView(R.id.til_username)
+    TextInputLayout tilUsername;
+    @BindView(R.id.til_password)
+    TextInputLayout tilPassword;
+
     private Context mContext;
 
     @Override
@@ -50,7 +58,71 @@ public class RegisterActivity extends BaseActivity<Contract.RegisterActivityView
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        mContext = getApplicationContext();
+        mContext = this;
+        mUsername.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length()!=0 && s.length()<6){
+                    tilUsername.setHelperText("用户名不合规范");
+                }else {
+                    tilUsername.setHelperText("");
+                }
+            }
+        });
+
+        mPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length()!=0 && s.length()<6){
+                    tilPassword.setHelperText("密码不合规范");
+                }else {
+                    tilPassword.setHelperText("");
+                }
+            }
+        });
+
+        mRepassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String ms = s.toString();
+                if (ms.isEmpty()) return;
+                if (!ms.equals(mPassword.getText().toString())) {
+                    tilRpassword.setHelperText("两次密码输入不一致");
+                }else {
+                    tilRpassword.setHelperText("");
+                }
+            }
+        });
     }
 
     @Override
@@ -105,4 +177,5 @@ public class RegisterActivity extends BaseActivity<Contract.RegisterActivityView
         }
         mPresenter.register(mUsername.getText().toString(), mPassword.getText().toString());
     }
+
 }

@@ -31,11 +31,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * @author wangyz
- * @time 2019/1/18 9:22
- * @description WxArticleAdapter
- */
 public class WxArticleAdapter extends RecyclerView.Adapter<WxArticleAdapter.ViewHolder> {
 
     private Context mContext;

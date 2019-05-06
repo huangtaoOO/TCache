@@ -37,11 +37,6 @@ import java.util.regex.Pattern;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * @author wangyz
- * @time 2019/1/18 9:22
- * @description MainArticleAdapter
- */
 public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder> {
 
     private Context mContext;

@@ -34,11 +34,6 @@ import java.util.List;
 import butterknife.BindView;
 import me.itangqi.waveloadingview.WaveLoadingView;
 
-/**
- * @author wangyz
- * @time 2019/1/22 14:59
- * @description ProjectArticleFragment
- */
 public class ProjectArticleFragment extends BaseFragment<Contract.ProjectArticleFragmentView, ProjectArticleFragmentPresenter> implements Contract.ProjectArticleFragmentView {
 
     @BindView(R.id.fragment_project_article_refresh)

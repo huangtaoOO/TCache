@@ -33,11 +33,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-/**
- * MainActivity
- *
- * @author wangyz
- */
 public class MainActivity extends BaseActivity<Contract.MainActivityView, MainActivityPresenter> implements Contract.MainActivityView {
 
 

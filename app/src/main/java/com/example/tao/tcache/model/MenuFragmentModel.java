@@ -6,11 +6,6 @@ import com.example.tao.tcache.contract.Contract;
 
 import io.reactivex.Observable;
 
-/**
- * @author wangyz
- * @time 2019/1/17 15:50
- * @description MenuFragmentModel
- */
 public class MenuFragmentModel extends BaseModel implements Contract.MenuFragmentModel {
 
     public MenuFragmentModel() {

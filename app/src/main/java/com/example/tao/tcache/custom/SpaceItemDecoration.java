@@ -5,11 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-/**
- * @author wangyz
- * @time 2019/1/18 11:03
- * @description SpaceItemDecoration
- */
 public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
 
     private int space;

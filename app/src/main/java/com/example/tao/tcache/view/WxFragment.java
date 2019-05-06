@@ -22,11 +22,6 @@ import java.util.List;
 import butterknife.BindView;
 import me.itangqi.waveloadingview.WaveLoadingView;
 
-/**
- * @author wangyz
- * @time 2019/1/21 17:22
- * @description WxFragment
- */
 public class WxFragment extends BaseFragment<Contract.WxFragmentView, WxFragmentPresenter> implements Contract.WxFragmentView {
 
     @BindView(R.id.fragment_wx_tab)

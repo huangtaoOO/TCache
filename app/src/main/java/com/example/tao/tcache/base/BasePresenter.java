@@ -4,11 +4,6 @@ import java.lang.ref.WeakReference;
 
 import io.reactivex.disposables.CompositeDisposable;
 
-/**
- * @param <V>
- * @author wangyz
- * Presenter的基类
- */
 public abstract class BasePresenter<V> {
 
     protected WeakReference<V> mViewRef;

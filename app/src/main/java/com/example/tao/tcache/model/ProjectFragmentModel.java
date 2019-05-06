@@ -14,11 +14,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-/**
- * @author wangyz
- * @time 2019/1/22 14:26
- * @description ProjectFragmentModel
- */
 public class ProjectFragmentModel extends BaseModel implements Contract.ProjectFragmentModel {
 
     @Override

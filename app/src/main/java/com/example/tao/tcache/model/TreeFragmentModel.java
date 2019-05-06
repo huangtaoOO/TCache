@@ -16,11 +16,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-/**
- * @author wangyz
- * @time 2019/1/23 9:42
- * @description TreeFragmentModel
- */
 public class TreeFragmentModel extends BaseModel implements Contract.TreeFragmentModel {
 
     @TargetApi(Build.VERSION_CODES.N)

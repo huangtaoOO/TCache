@@ -1,10 +1,5 @@
 package com.example.tao.tcache;
 
-/**
- * @author wangyz
- * @time 2019/1/17 16:12
- * @description ConstantValue
- */
 public class ConstantValue {
 
     /**

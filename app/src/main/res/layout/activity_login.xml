@@ -4,55 +4,74 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <View
+    <android.support.v7.widget.Toolbar
         android:id="@+id/head"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/head_height"
+        android:layout_height="wrap_content"
         android:background="@color/baseBackground"
+        app:contentInsetStart="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/menu_button_padding"
-        android:src="@drawable/back_selector"
-        app:layout_constraintBottom_toBottomOf="@id/head"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/head" />
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back_selector"
+            android:layout_marginStart="12dp"
+            android:layout_gravity="center_vertical"/>
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:textColor="@color/baseTextColor"
-        app:layout_constraintBottom_toBottomOf="@id/head"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/head" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:textColor="@color/baseTextColor"
+            android:textSize="18sp"
+            android:layout_gravity="center" />
 
-    <EditText
-        android:id="@+id/username"
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:boxBackgroundColor="@color/button_border"
+        android:layout_marginTop="12dp"
         android:layout_margin="@dimen/login_margin"
-        android:hint="@string/input_username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/head" />
+        app:layout_constraintTop_toBottomOf="@id/head">
 
-    <EditText
-        android:id="@+id/password"
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_username"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/head" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:layout_margin="@dimen/login_margin"
-        android:hint="@string/input_password"
-        android:inputType="textPassword"
+        app:boxBackgroundColor="@color/button_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/username" />
+        app:layout_constraintTop_toBottomOf="@id/til_username">
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_password"
+            android:inputType="textPassword"
+            />
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/login"
@@ -61,10 +80,12 @@
         android:layout_margin="@dimen/login_margin"
         android:background="@drawable/register_button_bg"
         android:text="@string/login"
-        android:textColor="@color/baseTextColor"
+        android:layout_marginTop="12dp"
+        android:textSize="18sp"
+        android:textColor="@color/baseTextColorLight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password" />
+        app:layout_constraintTop_toBottomOf="@id/til_password" />
 
     <Button
         android:id="@+id/go_register"

@@ -20,11 +20,6 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-/**
- * @author wangyz
- * @time 2019/1/29 14:29
- * @description SettingActivity
- */
 public class SettingActivity extends BaseActivity<Contract.SettingActivityView, SettingActivityPresenter> implements Contract.SettingActivityView {
 
     @BindView(R.id.night)

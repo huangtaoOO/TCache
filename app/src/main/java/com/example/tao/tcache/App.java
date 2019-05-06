@@ -10,11 +10,6 @@ import com.blankj.utilcode.util.Utils;
 
 import org.litepal.LitePal;
 
-/**
- * @author wangyz
- * @time 2019/1/17 16:35
- * @description App
- */
 public class App extends Application {
 
     private boolean isLogin = false;

@@ -7,11 +7,6 @@ import com.example.tao.tcache.contract.Contract;
 
 import io.reactivex.Observable;
 
-/**
- * @author wangyz
- * @time 2019/1/28 17:17
- * @description SearchResultActivityModel
- */
 public class SearchResultActivityModel extends BaseModel implements Contract.SearchResultActivityModel {
 
     public SearchResultActivityModel() {

@@ -4,7 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#06B3ED</color>
 
-    <color name="baseTextColor">#757575</color>
+    <color name="baseTextColor">#353434</color>
+    <color name="baseTextColorLight">#FFFFFF</color>
     <color name="baseBackground">#FFFFFF</color>
 
     <color name="tag_bg">#06B3ED</color>

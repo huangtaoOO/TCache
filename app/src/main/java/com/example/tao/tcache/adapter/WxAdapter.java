@@ -15,11 +15,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author wangyz
- * @time 2019/1/22 9:40
- * @description WxAdapter
- */
 public class WxAdapter extends FragmentPagerAdapter {
 
     private FragmentManager mFragmentManager;
