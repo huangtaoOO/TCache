@@ -86,4 +86,18 @@
         android:textColor="@color/baseTextColor"
         app:layout_constraintTop_toBottomOf="@id/collect" />
 
+    <Button
+        android:id="@+id/more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableEnd="@drawable/more"
+        android:drawableStart="@drawable/settings"
+        android:gravity="left|center_vertical"
+        android:padding="@dimen/menu_button_padding"
+        android:text="@string/settings"
+        android:textColor="@color/baseTextColor"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/settings" />
+
 </android.support.constraint.ConstraintLayout>

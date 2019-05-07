@@ -1,5 +1,6 @@
 package com.example.tao.tcache.contract;
 
+import com.example.tao.tcache.base.Reply;
 import com.example.tao.tcache.bean.db.Article;
 import com.example.tao.tcache.bean.db.Author;
 import com.example.tao.tcache.bean.db.Banner;
@@ -10,6 +11,8 @@ import com.example.tao.tcache.bean.model.Login;
 import com.example.tao.tcache.bean.model.Logout;
 import com.example.tao.tcache.bean.model.Register;
 import com.example.tao.tcache.bean.model.SearchResult;
+import com.example.tao.tcache.bean.model.TodoBean;
+import com.example.tao.tcache.bean.model.TodoListBean;
 import com.example.tao.tcache.bean.model.TreeInfo;
 
 import java.util.List;
@@ -1112,6 +1115,18 @@ public class Contract {
      * SettingActivityPresenter
      */
     public interface SettingActivityPresenter {
+
+    }
+
+    public interface TodoListActivityModel{
+        Observable<Reply<TodoListBean>> getTodoList(String page);
+    }
+
+    public interface TodoListActivityView extends BaseView{
+        void refreshData(List<TodoBean> list);
+    }
+
+    public interface TodoListActivityPresenter{
 
     }
 

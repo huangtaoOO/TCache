@@ -2,6 +2,7 @@ package com.example.tao.tcache.api;
 
 import com.example.cache.Constant;
 import com.example.tao.tcache.ConstantValue;
+import com.example.tao.tcache.base.Reply;
 import com.example.tao.tcache.bean.model.Article;
 import com.example.tao.tcache.bean.model.Author;
 import com.example.tao.tcache.bean.model.Banner;
@@ -13,7 +14,11 @@ import com.example.tao.tcache.bean.model.Logout;
 import com.example.tao.tcache.bean.model.ProjectCategory;
 import com.example.tao.tcache.bean.model.Register;
 import com.example.tao.tcache.bean.model.SearchResult;
+import com.example.tao.tcache.bean.model.TodoBean;
+import com.example.tao.tcache.bean.model.TodoListBean;
 import com.example.tao.tcache.bean.model.Tree;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -184,5 +189,14 @@ public interface Api {
     @POST(ConstantValue.URL_SEARCH)
     @Headers(Constant.HEADER_NO)
     Observable<SearchResult> search(@Path("page") int page, @Query("k") String kw);
+
+    /**
+     * 获取todo list
+     * @param page   页码
+     * @return
+     */
+    @GET(ConstantValue.URL_TODO_LIST)
+    @Headers(Constant.HEADER_NO)
+    Observable<Reply<TodoListBean>> getTodoList(@Path("page") String page);
 
 }

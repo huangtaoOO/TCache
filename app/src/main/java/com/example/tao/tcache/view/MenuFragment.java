@@ -27,7 +27,10 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
+
 public class MenuFragment extends BaseFragment<Contract.MenuFragmentView, MenuFragmentPresenter> implements Contract.MenuFragmentView {
 
     @BindView(R.id.username)
@@ -44,6 +47,9 @@ public class MenuFragment extends BaseFragment<Contract.MenuFragmentView, MenuFr
 
     @BindView(R.id.settings)
     Button mSetting;
+    @BindView(R.id.more)
+    Button more;
+    Unbinder unbinder;
 
     private Context mContext;
 
@@ -76,6 +82,7 @@ public class MenuFragment extends BaseFragment<Contract.MenuFragmentView, MenuFr
             mLogout.setVisibility(View.VISIBLE);
             mUsername.setText(loginUser);
             mCollect.setVisibility(View.VISIBLE);
+            more.setVisibility(View.VISIBLE);
         }
     }
 
@@ -131,6 +138,7 @@ public class MenuFragment extends BaseFragment<Contract.MenuFragmentView, MenuFr
                 mLogin.setVisibility(View.VISIBLE);
                 mLogout.setVisibility(View.GONE);
                 mCollect.setVisibility(View.GONE);
+                more.setVisibility(View.GONE);
 
                 Event event = new Event();
                 event.target = Event.TARGET_HOME;
@@ -169,7 +177,14 @@ public class MenuFragment extends BaseFragment<Contract.MenuFragmentView, MenuFr
                 mLogout.setVisibility(View.VISIBLE);
                 mUsername.setText(event.data);
                 mCollect.setVisibility(View.VISIBLE);
+                more.setVisibility(View.VISIBLE);
             }
         }
+    }
+
+    @OnClick(R.id.more)
+    public void onViewClicked() {
+        if (getActivity()!=null)
+            getActivity().startActivity(new Intent(getActivity(),TodoListActivity.class));
     }
 }

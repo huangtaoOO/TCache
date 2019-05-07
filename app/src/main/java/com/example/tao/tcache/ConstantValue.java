@@ -92,6 +92,9 @@ public class ConstantValue {
      */
     public static final String URL_SEARCH = "/article/query/{page}/json";
 
+
+    public static final String URL_TODO_LIST = "/lg/todo/v2/list/{page}/json";
+
     /**
      * 反馈地址
      */
