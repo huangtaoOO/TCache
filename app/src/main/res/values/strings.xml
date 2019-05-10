@@ -31,4 +31,6 @@
     <string name="settings">设置</string>
     <string name="night_mode">夜间模式</string>
     <string name="feedback">反馈</string>
+    <string name="creattime">创建时间：%1$s</string>
+    <string name="completetime">完成时间：%1$s</string>
 </resources>

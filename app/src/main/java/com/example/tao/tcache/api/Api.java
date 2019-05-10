@@ -197,6 +197,18 @@ public interface Api {
      */
     @GET(ConstantValue.URL_TODO_LIST)
     @Headers(Constant.HEADER_NO)
+    Observable<Reply<TodoListBean>> getTodoList(@Path("page") String page,@Query("status") int status);
+
+    @GET(ConstantValue.URL_TODO_LIST)
+    @Headers(Constant.HEADER_NO)
     Observable<Reply<TodoListBean>> getTodoList(@Path("page") String page);
+
+    @POST("/lg/todo/done/{id}/json")
+    @Headers(Constant.HEADER_NO)
+    Observable<Reply> complete(@Path("id") int id,@Query("status") int status);
+
+    @POST("/lg/todo/delete/{id}/json")
+    @Headers(Constant.HEADER_NO)
+    Observable<Reply> delete(@Path("id") int id);
 
 }

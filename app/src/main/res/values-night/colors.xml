@@ -23,4 +23,5 @@
 
     <color name="button_bg">#4D4D4D</color>
     <color name="button_border">#303030</color>
+    <color name="red">#64220E</color>
 </resources>

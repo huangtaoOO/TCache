@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
+    android:layout_width="250dp"
     android:layout_height="wrap_content"
-    android:background="@android:color/holo_green_light"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@drawable/bg_todo_item"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="12dp"
+    android:id="@+id/container_todo">
 
     <TextView
         android:id="@+id/tv_todo_title"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="标题"
         android:gravity="center"
         android:textColor="@color/baseTextColor"
         android:textSize="16sp"
@@ -28,7 +29,6 @@
 
     <TextView
         android:id="@+id/tv_content"
-        android:text="内容"
         android:textColor="@color/baseTextColor"
         android:textSize="14sp"
         android:gravity="center"
@@ -49,7 +49,6 @@
 
     <TextView
         android:id="@+id/tv_create_time"
-        android:text="创建时间:$s"
         android:textColor="@color/baseTextColor"
         android:textSize="14sp"
         android:gravity="end"
@@ -62,7 +61,6 @@
 
     <TextView
         android:id="@+id/tv_complete_time"
-        android:text="完成时间:$s"
         android:textColor="@color/baseTextColor"
         android:textSize="14sp"
         android:gravity="end"
@@ -70,6 +68,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/tv_compete"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"
+        android:gravity="start"
+        android:textStyle="bold"
+        android:text="完成"
+        app:layout_constraintTop_toBottomOf="@id/tv_complete_time"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_delete"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        android:gravity="end"
+        android:textStyle="bold"
+        android:text="删除"
+        app:layout_constraintTop_toBottomOf="@id/tv_complete_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
 

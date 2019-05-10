@@ -2,14 +2,18 @@ package com.example.tao.tcache.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.example.tao.tcache.R;
 import com.example.tao.tcache.bean.model.TodoBean;
+
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -45,6 +49,26 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
         TodoBean todoBean = list.get(i);
         viewHolder.tvTodoTitle.setText(todoBean.getTitle());
         viewHolder.tvContent.setText(todoBean.getContent());
+        viewHolder.tvCreateTime.setText(mContext.getString(R.string.creattime, todoBean.getDateStr()));
+        if (todoBean.getCompleteDateStr() != null && todoBean.getCompleteDateStr().isEmpty()) {
+            viewHolder.tvCompleteTime.setVisibility(View.GONE);
+        } else {
+            viewHolder.tvCompleteTime.setText(mContext.getString(R.string.completetime, todoBean.getCompleteDateStr()));
+            viewHolder.tvCompleteTime.setVisibility(View.VISIBLE);
+        }
+        if (todoBean.getStatus() == 0) {
+            viewHolder.tvComplete.setText("未完成");
+        } else {
+            viewHolder.tvComplete.setText("已完成");
+        }
+        viewHolder.tvComplete.setOnClickListener(v -> {
+            if (listener != null)
+                listener.onListener1(todoBean);
+        });
+        viewHolder.tvDelete.setOnClickListener(v -> {
+            if (listener != null)
+                listener.onListener2(todoBean);
+        });
     }
 
     @Override
@@ -71,13 +95,31 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
         View dividingLine2;
         @BindView(R.id.tv_create_time)
         TextView tvCreateTime;
-
         @BindView(R.id.tv_complete_time)
         TextView tvCompleteTime;
+        @BindView(R.id.tv_compete)
+        TextView tvComplete;
+        @BindView(R.id.container_todo)
+        ConstraintLayout containerTodo;
+        @BindView(R.id.tv_delete)
+        TextView tvDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
     }
+
+    private Listener listener;
+
+    public void setListener(Listener listener) {
+        this.listener = listener;
+    }
+
+    public interface Listener {
+        void onListener1(TodoBean bean);
+
+        void onListener2(TodoBean bean);
+    }
+
 }

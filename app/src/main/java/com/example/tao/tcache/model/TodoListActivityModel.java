@@ -25,7 +25,20 @@ public class TodoListActivityModel extends BaseModel implements Contract.TodoLis
     }
 
     @Override
-    public Observable<Reply<TodoListBean>> getTodoList(String page) {
-        return mApi.getTodoList(page);
+    public Observable<Reply<TodoListBean>> getTodoList(String page,int statue) {
+        if (statue!=0&&statue!=1)
+            return mApi.getTodoList(page);
+        else
+            return mApi.getTodoList(page,statue);
+    }
+
+    @Override
+    public Observable<Reply> complete(int id, int statue) {
+        return mApi.complete(id,statue);
+    }
+
+    @Override
+    public Observable<Reply> delete(int id) {
+        return mApi.delete(id);
     }
 }

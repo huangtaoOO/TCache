@@ -35,8 +35,8 @@ public class TodoListActivityPresenter extends BasePresenter<Contract.TodoListAc
         model = new TodoListActivityModel();
     }
 
-    public void getData(String page){
-        model.getTodoList(page).subscribeOn(Schedulers.io())
+    public void getData(String page,int statue){
+        model.getTodoList(page,statue).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Reply<TodoListBean>>() {
                     @Override
@@ -45,8 +45,63 @@ public class TodoListActivityPresenter extends BasePresenter<Contract.TodoListAc
 
                     @Override
                     public void onNext(Reply<TodoListBean> todoBeanReply) {
-                        getView().onLoadSuccess();
                         getView().refreshData(todoBeanReply.getData().getDatas());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtils.e(e.getMessage());
+                        getView().onLoadFailed();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        LogUtils.i();
+                    }
+                });
+    }
+
+    public void complete(TodoBean bean){
+        model.complete(bean.getId(),bean.getStatus()==0?1:0)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Reply>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(Reply todoBeanReply) {
+                        getView().onLoadSuccess();
+                        getData(1+"",4);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtils.e(e.getMessage());
+                        getView().onLoadFailed();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        LogUtils.i();
+                    }
+                });
+    }
+
+    public void delete(TodoBean bean){
+        model.delete(bean.getId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Reply>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(Reply todoBeanReply) {
+                        getView().onLoadSuccess();
+                        getData(1+"",4);
                     }
 
                     @Override

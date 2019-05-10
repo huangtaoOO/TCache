@@ -1119,7 +1119,11 @@ public class Contract {
     }
 
     public interface TodoListActivityModel{
-        Observable<Reply<TodoListBean>> getTodoList(String page);
+        Observable<Reply<TodoListBean>> getTodoList(String page,int statue);
+
+        Observable<Reply> complete(int id,int statue);
+
+        Observable<Reply> delete(int id);
     }
 
     public interface TodoListActivityView extends BaseView{

@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:contentInsetStart="0dp"
-        app:contentInsetEnd="0dp">
+        app:contentInsetEnd="0dp"
+        android:background="@color/baseBackground">
 
         <ImageView
             android:id="@+id/back"
@@ -30,6 +31,14 @@
             android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:entries="@array/select_statue"
+            />
 
     </android.support.v7.widget.Toolbar>
 
