@@ -15,7 +15,8 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.TodoListActivity"></activity>
+        <activity android:name=".view.AddTodoActivity"></activity>
+        <activity android:name=".view.TodoListActivity" />
         <activity
             android:name=".view.MainActivity"
             android:configChanges="orientation|screenSize|locale"

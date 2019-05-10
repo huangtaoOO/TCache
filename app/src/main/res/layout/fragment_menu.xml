@@ -74,6 +74,20 @@
         app:layout_constraintTop_toBottomOf="@id/menu_user" />
 
     <Button
+        android:id="@+id/more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableEnd="@drawable/more"
+        android:drawableStart="@drawable/project_checked"
+        android:gravity="left|center_vertical"
+        android:padding="@dimen/menu_button_padding"
+        android:text="Todo"
+        android:textColor="@color/baseTextColor"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/collect" />
+
+    <Button
         android:id="@+id/settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,20 +98,7 @@
         android:padding="@dimen/menu_button_padding"
         android:text="@string/settings"
         android:textColor="@color/baseTextColor"
-        app:layout_constraintTop_toBottomOf="@id/collect" />
+        app:layout_constraintTop_toBottomOf="@id/more" />
 
-    <Button
-        android:id="@+id/more"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:drawableEnd="@drawable/more"
-        android:drawableStart="@drawable/settings"
-        android:gravity="left|center_vertical"
-        android:padding="@dimen/menu_button_padding"
-        android:text="@string/settings"
-        android:textColor="@color/baseTextColor"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/settings" />
 
 </android.support.constraint.ConstraintLayout>

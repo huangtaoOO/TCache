@@ -211,4 +211,8 @@ public interface Api {
     @Headers(Constant.HEADER_NO)
     Observable<Reply> delete(@Path("id") int id);
 
+    @POST("/lg/todo/add/json")
+    @Headers(Constant.HEADER_NO)
+    Observable<Reply> add(@Query("title") String title , @Query("content") String content , @Query("date") String date);
+
 }

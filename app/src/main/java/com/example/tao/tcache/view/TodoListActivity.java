@@ -1,16 +1,17 @@
 package com.example.tao.tcache.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Path;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tao.tcache.R;
@@ -25,10 +26,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class TodoListActivity extends BaseActivity<Contract.TodoListActivityView, TodoListActivityPresenter>
         implements Contract.TodoListActivityView {
+    @BindView(R.id.add_todo)
+    TextView addTodo;
     private PathLayoutManager pathLayoutManager;
 
     @BindView(R.id.spinner)
@@ -81,22 +85,22 @@ public class TodoListActivity extends BaseActivity<Contract.TodoListActivityView
                 mPresenter.delete(bean);
             }
         });
-        mPresenter.getData(1 + "",2);
+        mPresenter.getData(1 + "", 2);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+                switch (position) {
                     case 0:
-                        mPresenter.getData(1 + "",2);
+                        mPresenter.getData(1 + "", 2);
                         break;
                     case 1:
-                        mPresenter.getData(1 + "",0);
+                        mPresenter.getData(1 + "", 0);
                         break;
                     case 2:
-                        mPresenter.getData(1 + "",1);
+                        mPresenter.getData(1 + "", 1);
                         break;
                     default:
-                        mPresenter.getData(1 + "",2);
+                        mPresenter.getData(1 + "", 2);
                         break;
                 }
             }
@@ -105,6 +109,10 @@ public class TodoListActivity extends BaseActivity<Contract.TodoListActivityView
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+        });
+
+        addTodo.setOnClickListener(v -> {
+            startActivity(new Intent(this,AddTodoActivity.class));
         });
     }
 
@@ -120,7 +128,7 @@ public class TodoListActivity extends BaseActivity<Contract.TodoListActivityView
 
     @Override
     public void onLoadSuccess() {
-        Toast.makeText(this,"成功",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "成功", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -137,12 +145,17 @@ public class TodoListActivity extends BaseActivity<Contract.TodoListActivityView
     @Override
     public void refreshData(List<TodoBean> list) {
         int height = recyclerTodo.getHeight();
-        if (list.size()<10){
+        if (list.size() < 10) {
             pathLayoutManager.setItemOffset(height);
-        }else {
+        } else {
             pathLayoutManager.setItemOffset(300);
         }
         todoListAdapter.setList(list);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.getData(1+"",4);
+    }
 }

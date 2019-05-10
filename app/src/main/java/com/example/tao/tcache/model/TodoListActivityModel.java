@@ -7,6 +7,7 @@ import com.example.tao.tcache.bean.model.TodoListBean;
 import com.example.tao.tcache.contract.Contract;
 
 import java.util.List;
+import java.util.Observer;
 
 import io.reactivex.Observable;
 
@@ -40,5 +41,9 @@ public class TodoListActivityModel extends BaseModel implements Contract.TodoLis
     @Override
     public Observable<Reply> delete(int id) {
         return mApi.delete(id);
+    }
+
+    public Observable<Reply> add(String t , String c , String ti){
+        return mApi.add(t,c,ti);
     }
 }
